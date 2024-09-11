@@ -1,5 +1,5 @@
-import { isDevMode } from '@angular/core'
 import { Action, ActionReducer, ActionReducerMap, INIT, UPDATE } from '@ngrx/store'
+import { environment } from 'src/environments/environment'
 import { AuthState, authReducer } from './auth/auth.reducer'
 import { CartState, cartReducer } from './cart/cart.reducer'
 import { ProductState, productReducer } from './product/product.reducer'
@@ -49,4 +49,4 @@ export function saveToLocalStorage(reducer: ActionReducer<any>): ActionReducer<a
     }
 }
 
-export const metaReducers = isDevMode() ? [loggerMetaReducer, saveToLocalStorage] : [saveToLocalStorage]
+export const metaReducers = !environment.production ? [loggerMetaReducer, saveToLocalStorage] : [saveToLocalStorage]

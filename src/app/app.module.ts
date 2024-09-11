@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreModule } from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { environment } from 'src/environments/environment'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { ProductCardModule } from './components/product-card/product-card.module'
@@ -14,6 +15,15 @@ import { HeaderComponent } from './layouts/header/header.component'
 import { HomeComponent } from './pages/home/home.component'
 import { ProductEffects } from './store/product/product.effect'
 import { metaReducers, reducers } from './store/reducer'
+
+const storeDevtoolsModule = !environment.production
+    ? [
+          StoreDevtoolsModule.instrument({
+              maxAge: 25,
+              logOnly: !isDevMode()
+          })
+      ]
+    : []
 
 @NgModule({
     declarations: [AppComponent, HomeComponent, HeaderComponent, FooterComponent],
@@ -24,10 +34,7 @@ import { metaReducers, reducers } from './store/reducer'
         HttpClientModule,
         StoreModule.forRoot(reducers, { metaReducers }),
         EffectsModule.forRoot([ProductEffects]),
-        StoreDevtoolsModule.instrument({
-            maxAge: 25,
-            logOnly: isDevMode()
-        }),
+        storeDevtoolsModule,
         ProductCardModule
     ],
     providers: [],
