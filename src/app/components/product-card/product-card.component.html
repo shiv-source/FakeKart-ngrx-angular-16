@@ -1,0 +1,8 @@
+<div *ngIf="product" class="bg-white flex justify-center shadow-sm p-3 border rounded-lg" (click)="onProductSelect(product)">
+    <div class="p-3">
+        <img [src]="product.image" [alt]="product.title" class="h-[200px]" />
+        <p class="pt-5 text-center text-xl">
+            <i class="fa-solid fa-dollar-sign"></i> <span class="pl-1">{{ product.price }}</span>
+        </p>
+    </div>
+</div>

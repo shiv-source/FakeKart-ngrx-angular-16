@@ -1,0 +1,28 @@
+<div *ngIf="product$ | async as product" class="px-16 pt-28 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6 h-screen">
+    <div class="flex justify-center px-16">
+        <img [src]="product.image" [alt]="product.title" class="h-3/4 w-fit" />
+    </div>
+    <div>
+        <p class="text-4xl font-bold text-primary">{{ product.title | titlecase }}</p>
+        <p class="pt-3 text-lg">
+            <span>Rating</span><span class="pl-2">{{ product.rating.rate }}</span>
+            <span class="pl-2">{{ product.rating.count }}</span>
+        </p>
+        <p class="pt-10 text-lg">
+            <span class="bg-red-500 text-white px-5 py-2">{{ product.category | titlecase }}</span>
+        </p>
+        <p class="pt-10 text-lg text-justify">{{ product.description }}</p>
+        <p class="pt-10 text-3xl">
+            <i class="fa-solid fa-dollar-sign"></i><span class="pl-1">{{ product.price }}</span>
+        </p>
+        <div class="pt-6">
+            <button
+                (click)="onAddToCart(product)"
+                class="px-5 py-3 bg-primary text-white rounded-md text-lg hover:cursor-pointer"
+            >
+                <i class="fa-solid fa-cart-plus"></i>
+                <span class="pl-2">Add To Cart</span>
+            </button>
+        </div>
+    </div>
+</div>

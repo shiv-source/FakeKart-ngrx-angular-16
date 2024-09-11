@@ -1,0 +1,69 @@
+<header class="bg-primary-dark shadow-md w-full fixed">
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+        <!-- Logo -->
+        <div class="text-2xl font-bold">
+            <a routerLink="/" class="text-primary">FakeKart</a>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="hidden md:flex w-1/3">
+            <input
+                type="text"
+                placeholder="Search products..."
+                class="w-full p-2 rounded-md border border-gray-300 focus:border-primary focus:ring-primary focus:ring-2 focus:outline-none"
+            />
+        </div>
+
+        <!-- Navigation and Icons -->
+        <div class="hidden md:flex items-center space-x-6">
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a routerLink="/" class="hover:text-primary">Home</a></li>
+                    <li><a routerLink="/" class="hover:text-primary">Shop</a></li>
+                    <li><a routerLink="/contact" class="hover:text-primary">Contact</a></li>
+                </ul>
+            </nav>
+
+            <!-- Cart Icon -->
+            <a routerLink="/cart" class="relative">
+                <!-- Cart Icon itself -->
+                <i class="fa-solid fa-cart-shopping text-gray-500 hover:text-primary text-xl"></i>
+
+                <span
+                    class="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center"
+                >
+                    <span *ngIf="quantity$ | async as quantity">
+                        <ng-container *ngIf="quantity < 100; else moreQuantity">{{ quantity }}</ng-container>
+                        <ng-template #moreQuantity>99+</ng-template>
+                    </span>
+                </span>
+            </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden" (click)="toggleNav = !toggleNav">
+            <button id="menuToggle" class="focus:outline-none">
+                <svg
+                    class="w-6 h-6 text-gray-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu (Hidden by default) -->
+    <div id="mobileMenu" class="md:hidden bg-white border-t border-gray-200" [ngClass]="toggleNav ? '' : 'hidden'">
+        <nav class="px-4 py-4 space-y-4">
+            <a href="#" class="block text-gray-700 hover:text-primary">Home</a>
+            <a href="#" class="block text-gray-700 hover:text-primary">Shop</a>
+            <a href="#" class="block text-gray-700 hover:text-primary">Contact</a>
+            <!-- Mobile Search Bar -->
+            <input type="text" placeholder="Search products..." class="w-full p-2 rounded-md border border-gray-300" />
+        </nav>
+    </div>
+</header>

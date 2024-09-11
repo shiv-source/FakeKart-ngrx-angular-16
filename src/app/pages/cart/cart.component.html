@@ -1,0 +1,66 @@
+<div class="px-4 sm:px-8 md:px-16 pt-10 sm:pt-16 md:pt-24 pb-8 min-h-screen bg-[#eaeded]">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+        <div class="col-span-3">
+            <div
+                *ngFor="let cartProduct of cartProducts$ | async"
+                class="flex flex-col md:flex-row justify-between items-center p-5 mb-4 rounded-lg bg-white"
+            >
+                <img
+                    [src]="cartProduct.product.image"
+                    [alt]="cartProduct.product.title"
+                    class="w-[80px] h-[80px] md:w-[100px] md:h-[100px] object-cover"
+                    (click)="onSelectProduct(cartProduct.product)"
+                />
+
+                <div class="flex gap-2 md:gap-4 items-center mt-3 md:mt-0">
+                    <button (click)="addProduct(cartProduct.product)" class="bg-red-400 text-white px-2 py-1">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <p class="text-lg">{{ cartProduct.quantity }}</p>
+                    <button (click)="removeProduct(cartProduct.product)" class="bg-red-400 text-white px-2 py-1">
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+                </div>
+
+                <p class="text-lg font-semibold mt-3 md:mt-0 min-w-24">
+                    <i class="fa-solid fa-dollar-sign"></i><span class="pl-1">{{ calculateProductPrice(cartProduct) }}</span>
+                </p>
+            </div>
+        </div>
+
+        <div *ngIf="subTotal$ | async as subTotal" class="col-span-2">
+            <div class="sticky top-24 bg-white p-6 md:p-8 rounded-lg">
+                <div class="flex justify-between">
+                    <p>Subtotal ({{ subTotal.quantity }} item):</p>
+                    <p class="text-lg font-semibold">
+                        <i class="fa-solid fa-dollar-sign"></i>
+                        <span class="pl-1">{{ subTotal.price.toFixed(2) }}</span>
+                    </p>
+                </div>
+                <div class="flex justify-between py-4">
+                    <p>GST (18%):</p>
+                    <p class="text-lg font-semibold">
+                        <i class="fa-solid fa-dollar-sign"></i>
+                        <span class="pl-1">{{ calculateGst(subTotal.price) }}</span>
+                    </p>
+                </div>
+                <hr class="border-t border-gray-300" />
+                <div class="flex justify-between pt-3">
+                    <p>Total:</p>
+                    <p class="text-lg font-semibold">
+                        <i class="fa-solid fa-dollar-sign"></i>
+                        <span class="pl-1">{{ calculateTotalAmount(subTotal.price) }}</span>
+                    </p>
+                </div>
+                <div class="pt-10">
+                    <button
+                        (click)="onProceedToPay()"
+                        class="bg-primary text-white w-full py-3 rounded-full text-center text-lg font-bold"
+                    >
+                        Proceed to Buy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

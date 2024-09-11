@@ -1,0 +1,5 @@
+<form #form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <ng-template #formContainer></ng-template>
+    <button type="submit">Submit</button>
+    <button type="button" (click)="onClear()">Clear</button>
+</form>
