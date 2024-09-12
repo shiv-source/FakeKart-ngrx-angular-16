@@ -14,7 +14,8 @@ import { FooterComponent } from './layouts/footer/footer.component'
 import { HeaderComponent } from './layouts/header/header.component'
 import { HomeComponent } from './pages/home/home.component'
 import { ProductEffects } from './store/product/product.effect'
-import { metaReducers, reducers } from './store/reducer'
+import { metaReducers, reducers } from './store/reducer';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 const storeDevtoolsModule = !environment.production
     ? [
@@ -35,7 +36,8 @@ const storeDevtoolsModule = !environment.production
         StoreModule.forRoot(reducers, { metaReducers }),
         EffectsModule.forRoot([ProductEffects]),
         storeDevtoolsModule,
-        ProductCardModule
+        ProductCardModule,
+        BrowserAnimationsModule
     ],
     providers: [],
     bootstrap: [AppComponent]

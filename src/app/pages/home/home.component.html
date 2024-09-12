@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6 px-16 pt-24 pb-10 bg-[#eaeded]">
+<div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6 px-16 pt-24 pb-10 bg-primary-dark">
     <div *ngFor="let product of products$ | async">
         <app-product-card [product]="product" (productSelectEvent)="onProductSelectEvent($event)"></app-product-card>
     </div>

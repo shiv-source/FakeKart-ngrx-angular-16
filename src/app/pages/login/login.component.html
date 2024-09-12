@@ -1,4 +1,12 @@
-<div class="pt-24 w-full">
-    <p>login works!</p>
-    <app-dynamic-form [formFields]="_loginFormSchema"></app-dynamic-form>
+<div class="pt-24 w-full min-h-screen flex justify-center px-4 sm:px-8 lg:px-16">
+    <div class="w-full max-w-md sm:max-w-lg lg:max-w-2xl">
+        <div class="px-4 sm:px-8 py-5 bg-white rounded-lg">
+            <p class="pb-6 font-bold text-2xl sm:text-3xl text-primary">Login Form</p>
+            <app-dynamic-form [formFields]="_loginFormSchema"></app-dynamic-form>
+            <div>
+                <p>Forget password</p>
+                <p class="pt-1">Don't have an account ? <a routerLink="/signup" class="text-primary">Signup</a></p>
+            </div>
+        </div>
+    </div>
 </div>

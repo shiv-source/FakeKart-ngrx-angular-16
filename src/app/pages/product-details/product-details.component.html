@@ -1,28 +1,37 @@
-<div *ngIf="product$ | async as product" class="px-16 pt-28 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 gap-6 h-screen">
-    <div class="flex justify-center px-16">
-        <img [src]="product.image" [alt]="product.title" class="h-3/4 w-fit" />
+<div
+    *ngIf="product$ | async as product"
+    class="px-4 md:px-16 pt-10 md:pt-28 grid grid-cols-1 md:grid-cols-2 gap-6 h-full md:h-screen"
+>
+    <div class="flex justify-center px-4 md:px-16">
+        <img [src]="product.image" [alt]="product.title" class="max-h-80 md:max-h-96 w-auto object-contain" />
     </div>
     <div>
-        <p class="text-4xl font-bold text-primary">{{ product.title | titlecase }}</p>
-        <p class="pt-3 text-lg">
+        <p class="text-2xl md:text-4xl font-bold text-primary">{{ product.title | titlecase }}</p>
+        <p class="pt-3 text-base md:text-lg">
             <span>Rating</span><span class="pl-2">{{ product.rating.rate }}</span>
             <span class="pl-2">{{ product.rating.count }}</span>
         </p>
-        <p class="pt-10 text-lg">
-            <span class="bg-red-500 text-white px-5 py-2">{{ product.category | titlecase }}</span>
+        <p class="pt-5 md:pt-10 text-base md:text-lg">
+            <span class="bg-red-500 text-white px-4 md:px-5 py-1 md:py-2 rounded-lg">{{ product.category | titlecase }}</span>
         </p>
-        <p class="pt-10 text-lg text-justify">{{ product.description }}</p>
-        <p class="pt-10 text-3xl">
+        <p class="pt-5 md:pt-10 text-sm md:text-lg text-justify">{{ product.description }}</p>
+        <p class="pt-5 md:pt-10 text-2xl md:text-3xl">
             <i class="fa-solid fa-dollar-sign"></i><span class="pl-1">{{ product.price }}</span>
         </p>
-        <div class="pt-6">
+        <div class="pt-6 flex flex-col md:flex-row gap-4 md:gap-6">
             <button
                 (click)="onAddToCart(product)"
-                class="px-5 py-3 bg-primary text-white rounded-md text-lg hover:cursor-pointer"
+                class="px-4 md:px-6 py-2 md:py-3 bg-orange-500 text-black rounded-lg text-base md:text-lg hover:bg-yellow-600 hover:shadow-lg transition ease-in-out duration-300 flex items-center justify-center"
             >
                 <i class="fa-solid fa-cart-plus"></i>
                 <span class="pl-2">Add To Cart</span>
             </button>
+            <a
+                routerLink="/cart"
+                class="bg-yellow-400 text-black px-4 md:px-6 py-2 md:py-3 text-base md:text-lg hover:bg-yellow-500 hover:shadow-lg transition ease-in-out duration-300 rounded-lg text-center flex items-center justify-center"
+            >
+                Proceed to Checkout
+            </a>
         </div>
     </div>
 </div>

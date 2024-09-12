@@ -1,31 +1,33 @@
-<div class="px-4 sm:px-8 md:px-16 pt-10 sm:pt-16 md:pt-24 pb-8 min-h-screen bg-[#eaeded]">
+<div class="px-4 sm:px-8 md:px-16 pt-10 sm:pt-16 md:pt-24 pb-8 min-h-screen bg-primary-dark">
     <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
         <div class="col-span-3">
-            <div
-                *ngFor="let cartProduct of cartProducts$ | async"
-                class="flex flex-col md:flex-row justify-between items-center p-5 mb-4 rounded-lg bg-white"
-            >
-                <img
-                    [src]="cartProduct.product.image"
-                    [alt]="cartProduct.product.title"
-                    class="w-[80px] h-[80px] md:w-[100px] md:h-[100px] object-cover"
-                    (click)="onSelectProduct(cartProduct.product)"
-                />
+            <ng-container *ngIf="(cartProducts$ | async)?.length; else emptyBlock">
+                <div
+                    *ngFor="let cartProduct of cartProducts$ | async"
+                    class="flex flex-col md:flex-row justify-between items-center p-5 mb-4 rounded-lg bg-white"
+                >
+                    <img
+                        [src]="cartProduct.product.image"
+                        [alt]="cartProduct.product.title"
+                        class="w-[80px] h-[80px] md:w-[100px] md:h-[100px] object-cover"
+                        (click)="onSelectProduct(cartProduct.product)"
+                    />
 
-                <div class="flex gap-2 md:gap-4 items-center mt-3 md:mt-0">
-                    <button (click)="addProduct(cartProduct.product)" class="bg-red-400 text-white px-2 py-1">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                    <p class="text-lg">{{ cartProduct.quantity }}</p>
-                    <button (click)="removeProduct(cartProduct.product)" class="bg-red-400 text-white px-2 py-1">
-                        <i class="fa-solid fa-minus"></i>
-                    </button>
+                    <div class="flex gap-2 md:gap-4 items-center mt-3 md:mt-0">
+                        <button (click)="addProduct(cartProduct.product)" class="bg-red-400 text-white px-2 py-1">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                        <p class="text-lg">{{ cartProduct.quantity }}</p>
+                        <button (click)="removeProduct(cartProduct.product)" class="bg-red-400 text-white px-2 py-1">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
+
+                    <p class="text-lg font-semibold mt-3 md:mt-0 min-w-24">
+                        <i class="fa-solid fa-dollar-sign"></i><span class="pl-1">{{ calculateProductPrice(cartProduct) }}</span>
+                    </p>
                 </div>
-
-                <p class="text-lg font-semibold mt-3 md:mt-0 min-w-24">
-                    <i class="fa-solid fa-dollar-sign"></i><span class="pl-1">{{ calculateProductPrice(cartProduct) }}</span>
-                </p>
-            </div>
+            </ng-container>
         </div>
 
         <div *ngIf="subTotal$ | async as subTotal" class="col-span-2">
@@ -64,3 +66,12 @@
         </div>
     </div>
 </div>
+
+<ng-template #emptyBlock>
+    <div class="w-full h-full flex justify-center items-center">
+        <div class="text-center">
+            <p class="text-3xl text-primary font-medium">There is no items into your cart.</p>
+            <p class="pt-8"><a routerLink="/" class="bg-yellow-400 px-4 md:px-6 py-2 md:py-3 text-black text-base md:text-lg hover:shadow-lg transition ease-in-out duration-300 rounded-lg">Continue Shopping</a></p>
+        </div>
+    </div>
+</ng-template>

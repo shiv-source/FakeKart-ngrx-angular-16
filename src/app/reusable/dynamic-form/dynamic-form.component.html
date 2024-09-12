@@ -1,5 +1,11 @@
-<form #form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <ng-template #formContainer></ng-template>
-    <button type="submit">Submit</button>
-    <button type="button" (click)="onClear()">Clear</button>
+<form #form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="w-full" >
+    <div class="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-12 gap-4" #formContainer></div>
+    <ng-container *ngIf="actionTemplate; else defaultAction" [ngTemplateOutlet]="actionTemplate"></ng-container>
 </form>
+
+<ng-template #defaultAction>
+    <div class="flex justify-end gap-4">
+        <button *ngIf="hasResetBtn" mat-raised-button color="secondary" type="button" (click)="onReset()">Clear</button>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+</ng-template>

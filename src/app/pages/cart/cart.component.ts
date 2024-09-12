@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { Subscription, map, tap } from 'rxjs'
+import { Observable, Subscription, map, tap } from 'rxjs'
 import { AuthState } from 'src/app/store/auth/auth.reducer'
 import { selectIsLoggedIn } from 'src/app/store/auth/auth.selector'
 import { addProductToCart, removeProductFromCart } from 'src/app/store/cart/cart.action'
@@ -18,7 +18,7 @@ import { Product } from 'src/app/store/product/product.model'
 })
 export class CartComponent implements OnInit, OnDestroy {
     private subscription: Subscription = new Subscription()
-    cartProducts$ = this.store.select(selectCartProducts)
+    cartProducts$: Observable<CartProduct[]> = this.store.select(selectCartProducts)
 
     subTotal$ = this.store.select(selectCartProducts).pipe(
         map((cartProducts: CartProduct[]) => {

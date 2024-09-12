@@ -9,5 +9,9 @@ import { FormControl } from '@angular/forms'
 export class TextInputComponent {
     @Input() control!: FormControl
     @Input() label!: string
-    @Input() type: string = 'text'
+    @Input() matIcon: string = ''
+    @Input() iconPosition: 'prefix' | 'suffix' = 'suffix'
+    @Input() placeholder: string = ''
+    @Input() appearance: 'fill' | 'outline' = 'outline'
+    @Input() hint: string = ''
 }
