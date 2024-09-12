@@ -32,10 +32,7 @@
                 <span
                     class="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center"
                 >
-                    <span *ngIf="quantity$ | async as quantity">
-                        <ng-container *ngIf="quantity < 100; else moreQuantity">{{ quantity }}</ng-container>
-                        <ng-template #moreQuantity>99+</ng-template>
-                    </span>
+                    {{ quantity$ | async }}
                 </span>
             </a>
         </div>

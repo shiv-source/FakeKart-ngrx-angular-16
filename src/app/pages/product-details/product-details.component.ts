@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { Observable, Subscription, combineLatest, filter, map } from 'rxjs'
+import { Observable, Subscription, combineLatest, filter, map, tap } from 'rxjs'
 import { addProductToCart } from 'src/app/store/cart/cart.action'
 import { loadProduct } from 'src/app/store/product/product.action'
 import { Product } from 'src/app/store/product/product.model'
@@ -32,10 +32,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.subscription.add(
             combineLatest([this.productId$, this.product$])
                 .pipe(
-                    map(([productId, product]) => {
-                        if (productId && !product) {
-                            this.store.dispatch(loadProduct({ productId: Number(productId) }))
-                        }
+                    filter(([productId, product]) => Boolean(productId) && !product),
+                    tap(([productId, product]) => {
+                        this.store.dispatch(loadProduct({ productId: Number(productId) }))
                     })
                 )
                 .subscribe()
