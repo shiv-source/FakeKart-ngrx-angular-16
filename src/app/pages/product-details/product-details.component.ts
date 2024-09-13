@@ -25,7 +25,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         map(params => params['productId'])
     )
     product$ = this.store.select(selectSelectedProduct)
-    similarProducts$ = this.store.select(selectSelectedCategoryProduct).pipe(map(categoryProduct => categoryProduct?.products))
+    similarProducts$ = combineLatest([this.product$, this.store.select(selectSelectedCategoryProduct)]).pipe(
+        map(([product, categoryProduct]) => categoryProduct?.products.filter(p => p.id !== product?.id))
+    )
+
     offers = offersSchema
     _offers = offersSchema.slice(0, 4)
 
