@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Store } from '@ngrx/store'
 import { OwlOptions } from 'ngx-owl-carousel-o'
 import { Observable, Subscription, combineLatest, filter, map, take, tap } from 'rxjs'
+import { offersSchema } from 'src/app/schema/offers.schema'
 import { UtilsService } from 'src/app/services/utils.service'
 import { addProductToCart } from 'src/app/store/cart/cart.action'
 import { loadCategoryProduct } from 'src/app/store/category/category.action'
@@ -25,6 +26,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     )
     product$ = this.store.select(selectSelectedProduct)
     similarProducts$ = this.store.select(selectSelectedCategoryProduct).pipe(map(categoryProduct => categoryProduct?.products))
+    offers = offersSchema
+    _offers = offersSchema.slice(0, 4)
 
     customOptions: OwlOptions = {
         loop: true,
@@ -97,6 +100,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     onAddToCart(product: Product) {
         this.store.dispatch(addProductToCart({ product }))
+        this.router.navigateByUrl('/cart')
     }
 
     onSelectedProductEvent(product: Product) {
@@ -104,6 +108,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.router.navigate([`/product/${product.id}`])
     }
 
+    onShowAllOffers() {
+        this._offers = this.offers
+    }
     ngOnDestroy(): void {
         this.subscription.unsubscribe()
     }

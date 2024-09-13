@@ -15,6 +15,7 @@ import { ProductCarousalModule } from './components/product-carousal/product-car
 import { FooterComponent } from './layouts/footer/footer.component'
 import { HeaderComponent } from './layouts/header/header.component'
 import { HomeComponent } from './pages/home/home.component'
+import { AppDirectiveModule } from './reusable/directives/directive.module'
 import { UtilsModule } from './services/utils.module'
 import { rootEffects } from './store/effect'
 import { metaReducers, reducers } from './store/reducer'
@@ -41,7 +42,8 @@ const storeDevtoolsModule = !environment.production
         BrowserAnimationsModule,
         CarouselModule,
         ProductCarousalModule,
-        UtilsModule
+        UtilsModule,
+        AppDirectiveModule
     ],
     providers: [],
     bootstrap: [AppComponent]

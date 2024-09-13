@@ -1,4 +1,9 @@
-<div *ngIf="product" class="bg-white flex justify-center shadow-sm p-3 border rounded-lg" (click)="onProductSelect(product)">
+<div
+    scrollToTop
+    *ngIf="product"
+    class="bg-white flex justify-center shadow-sm p-3 border rounded-lg"
+    (click)="onProductSelect(product)"
+>
     <div class="p-3 h-[300px]">
         <img [src]="product.image" [alt]="product.title" class="h-[200px]" />
         <p class="pt-5 text-center text-xl">
