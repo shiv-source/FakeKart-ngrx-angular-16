@@ -26,62 +26,64 @@ export class ProductsComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        combineLatest([
-            this.route.queryParams,
-            this.store.select(selectSelectedCategoryProduct),
-            this.store.select(selectCategoryProducts),
-            this.store.select(selectCategories)
-        ])
-            .pipe(
-                filter(([params, categoryProduct, categoryProducts, categories]) => !!params),
-                map(
-                    ([params, categoryProduct, categoryProducts, categories]: [
-                        Params,
-                        CategoryProduct | null,
-                        CategoryProduct[],
-                        string[]
-                    ]) => {
-                        this.selectedCategory = params['category']
-                        return [params, categoryProduct, categoryProducts, categories, this.selectedCategory] as [
+        this.subscription.add(
+            combineLatest([
+                this.route.queryParams,
+                this.store.select(selectSelectedCategoryProduct),
+                this.store.select(selectCategoryProducts),
+                this.store.select(selectCategories)
+            ])
+                .pipe(
+                    filter(([params, categoryProduct, categoryProducts, categories]) => !!params),
+                    map(
+                        ([params, categoryProduct, categoryProducts, categories]: [
                             Params,
                             CategoryProduct | null,
                             CategoryProduct[],
-                            string[],
-                            string
-                        ]
-                    }
-                ),
-                filter(
-                    ([params, categoryProduct, categoryProducts, categories, category]) =>
-                        Boolean(category) && categoryProduct === null
-                ),
-                map(([params, categoryProduct, categoryProducts, categories, category]) => {
-                    this.store.dispatch(loadCategories())
-                    return [params, categoryProduct, categoryProducts, categories, category]
-                }),
-                filter(
-                    ([params, categoryProduct, categoryProducts, categories, category]) =>
-                        Boolean(category) && Array.isArray(categories) && categories.length > 0
-                ),
-                map(([params, categoryProduct, categoryProducts, categories, category]) => {
-                    this.store.dispatch(loadCategoriesProducts())
-                    return [params, categoryProduct, categoryProducts, categories, category]
-                }),
-                filter(
-                    ([params, categoryProduct, categoryProducts, categories, category]) =>
-                        Boolean(category) &&
-                        categoryProduct === null &&
-                        Array.isArray(categoryProducts) &&
-                        categoryProducts.length > 0
-                ),
-                map(([params, categoryProduct, categoryProducts, categories, category]) => {
-                    const selectedProduct = (categoryProducts as CategoryProduct[]).find(
-                        categoryProduct => categoryProduct.category === category
-                    )
-                    if (selectedProduct) this.store.dispatch(selectedCategoryProduct({ categoryProduct: selectedProduct }))
-                })
-            )
-            .subscribe()
+                            string[]
+                        ]) => {
+                            this.selectedCategory = params['category']
+                            return [params, categoryProduct, categoryProducts, categories, this.selectedCategory] as [
+                                Params,
+                                CategoryProduct | null,
+                                CategoryProduct[],
+                                string[],
+                                string
+                            ]
+                        }
+                    ),
+                    filter(
+                        ([params, categoryProduct, categoryProducts, categories, category]) =>
+                            Boolean(category) && categoryProduct === null
+                    ),
+                    map(([params, categoryProduct, categoryProducts, categories, category]) => {
+                        this.store.dispatch(loadCategories())
+                        return [params, categoryProduct, categoryProducts, categories, category]
+                    }),
+                    filter(
+                        ([params, categoryProduct, categoryProducts, categories, category]) =>
+                            Boolean(category) && Array.isArray(categories) && categories.length > 0
+                    ),
+                    map(([params, categoryProduct, categoryProducts, categories, category]) => {
+                        this.store.dispatch(loadCategoriesProducts())
+                        return [params, categoryProduct, categoryProducts, categories, category]
+                    }),
+                    filter(
+                        ([params, categoryProduct, categoryProducts, categories, category]) =>
+                            Boolean(category) &&
+                            categoryProduct === null &&
+                            Array.isArray(categoryProducts) &&
+                            categoryProducts.length > 0
+                    ),
+                    map(([params, categoryProduct, categoryProducts, categories, category]) => {
+                        const selectedProduct = (categoryProducts as CategoryProduct[]).find(
+                            categoryProduct => categoryProduct.category === category
+                        )
+                        if (selectedProduct) this.store.dispatch(selectedCategoryProduct({ categoryProduct: selectedProduct }))
+                    })
+                )
+                .subscribe()
+        )
     }
 
     onSelectedProductEvent(product: Product) {
