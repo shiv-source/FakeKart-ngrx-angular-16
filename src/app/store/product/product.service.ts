@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { map, Observable } from 'rxjs'
-import { ProductApiResponse, ProductsApiResponse } from 'src/app/interfaces/apiResponse'
+
 import { environment } from 'src/environments/environment'
-import { Product } from './product.model'
+import { Product, ProductApiResponse, ProductsApiResponse } from './product.model'
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {

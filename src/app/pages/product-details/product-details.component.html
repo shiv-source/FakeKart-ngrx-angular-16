@@ -1,33 +1,123 @@
-<div
-    *ngIf="product$ | async as product"
-    class="px-4 md:px-16 pt-10 md:pt-28 grid grid-cols-1 md:grid-cols-2 gap-6 h-full md:h-screen"
->
-    <div class="flex justify-center px-4 md:px-16">
-        <img [src]="product.image" [alt]="product.title" class="max-h-80 md:max-h-96 w-auto object-contain" />
+<div class="pt-24 px-4 sm:px-6 md:px-16 pb-16 w-full bg-primary-dark min-h-screen">
+    <div *ngIf="product$ | async as product" class="pt-8 bg-white grid grid-cols-1 sm:grid-cols-1 md:grid-cols-5 gap-6">
+        <div class="col-span-1 sm:col-span-1 md:col-span-2 p-5">
+            <div class="flex justify-center">
+                <img [src]="product.image" [alt]="product.title" class="max-h-80 md:max-h-96 w-auto object-contain border p-8" />
+            </div>
+            <div class="pt-8 flex justify-between gap-4 w-full">
+                <button
+                    class="bg-[#ff9f00] text-white w-full sm:w-1/2 py-4 text-sm sm:text-base flex items-center justify-center gap-1"
+                >
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Go to Cart</span>
+                </button>
+
+                <button
+                    class="bg-[#fb641b] text-white w-full sm:w-1/2 py-4 text-sm sm:text-base flex items-center justify-center gap-1"
+                >
+                    <i class="fas fa-bolt"></i>
+                    <span>Buy Now</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-span-1 sm:col-span-1 md:col-span-3">
+            <h1 class="text-2xl text-black">{{ product.title | titlecase }}</h1>
+            <p class="pt-1 text-gray-500 text-lg">#JustHere</p>
+            <div class="flex justify-start gap-4 pt-3">
+                <span class="bg-green-700 text-white px-3 py-1 rounded-sm text-sm flex items-center">
+                    <span>4.1</span>
+                    <i class="fa-solid fa-star pl-1"></i>
+                </span>
+                <p class="text-gray-500 font-medium">
+                    <span>5,66,205 Ratings &amp; 33,774 Reviews</span>
+                </p>
+                <img class="w-24 h-auto" src="assets/images/icons/assured.png" alt="" />
+            </div>
+
+            <p class="text-green-700 pt-3">Special Price</p>
+            <div class="flex items-baseline gap-4 pt-1">
+                <span class="text-3xl font-medium">
+                    <i class="fa-solid fa-dollar-sign"></i>{{ getPriceAfterDiscount(product) }}
+                </span>
+                <span class="line-through text-gray-500 text-lg"><i class="fa-solid fa-dollar-sign"></i>{{ product.price }}</span>
+                <span class="text-green-700 font-medium text-lg">{{ getDiscountPercent(product) }}% off</span>
+            </div>
+
+            <div class="pt-5">
+                <h2 class="text-lg font-medium">Available Offers</h2>
+                <div class="pt-3 space-y-2">
+                    <div class="flex items-center gap-3">
+                        <img class="w-5 h-5" src="assets/images/icons/tags.webp" alt="Bank Offer" />
+                        <span
+                            ><span class="font-medium">Bank Offer</span
+                            ><span class="pl-2">5% Unlimited Cashback on Flipkart Axis Bank Credit Card</span>
+                            <a href="#" class="text-primary">T&C</a></span
+                        >
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <img class="w-5 h-5" src="assets/images/icons/tags.webp" alt="Bank Offer" />
+                        <span
+                            ><span class="font-medium">Bank Offer</span
+                            ><span class="pl-2"
+                                >10% off up to ₹1,500 on IDFC FIRST Bank Credit EMI Txns on orders of ₹5,000 and above</span
+                            >
+                            <a href="#" class="text-primary">T&C</a></span
+                        >
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <img class="w-5 h-5" src="assets/images/icons/tags.webp" alt="Bank Offer" />
+                        <span
+                            ><span class="font-medium"> Bank Offer</span
+                            ><span class="pl-2"
+                                >Flat ₹1000 off on OneCard Credit Card EMI Transactions on orders of ₹10,000 and above</span
+                            >
+                            <a href="#" class="text-primary">T&C</a></span
+                        >
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <img class="w-5 h-5" src="assets/images/icons/tags.webp" alt="Bank Offer" />
+                        <span
+                            ><span class="font-medium">Special Price</span
+                            ><span class="pl-2">Get extra 31% off (price inclusive of cashback/coupon)</span>
+                            <a href="#" class="text-primary">T&C</a></span
+                        >
+                    </div>
+                    <p class="text-primary cursor-pointer pt-2 font-medium">View 8 more offers</p>
+                </div>
+            </div>
+
+            <div class="py-8 pr-5">
+                <div class="border">
+                    <h3 class="px-8 py-3 text-2xl font-medium">Specifications</h3>
+                    <hr />
+                    <div class="px-8 py-5 space-y-3">
+                        <div class="grid grid-cols-5 gap-2">
+                            <span class="font-medium text-gray-500">Brand</span>
+                            <span class="text-gray-800">{{ product.brand | titlecase }}</span>
+                        </div>
+                        <div class="grid grid-cols-5 gap-2">
+                            <span class="font-medium text-gray-500">Model</span>
+                            <span class="text-gray-800">{{ product.model | titlecase }}</span>
+                        </div>
+                        <div class="grid grid-cols-5 gap-2">
+                            <span class="font-medium text-gray-500">Category</span>
+                            <span class="text-gray-800"> {{ product.category | titlecase }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <p class="text-2xl md:text-4xl font-bold text-primary">{{ product.title | titlecase }}</p>
-        <p class="pt-5 md:pt-10 text-base md:text-lg">
-            <span class="bg-red-500 text-white px-4 md:px-5 py-1 md:py-2 rounded-lg">{{ product.category | titlecase }}</span>
-        </p>
-        <p class="pt-5 md:pt-10 text-sm md:text-lg text-justify">{{ product.description }}</p>
-        <p class="pt-5 md:pt-10 text-2xl md:text-3xl">
-            <i class="fa-solid fa-dollar-sign"></i><span class="pl-1">{{ product.price }}</span>
-        </p>
-        <div class="pt-6 flex flex-col md:flex-row gap-4 md:gap-6">
-            <button
-                (click)="onAddToCart(product)"
-                class="px-4 md:px-6 py-2 md:py-3 bg-orange-500 text-black rounded-lg text-base md:text-lg hover:bg-yellow-600 hover:shadow-lg transition ease-in-out duration-300 flex items-center justify-center"
-            >
-                <i class="fa-solid fa-cart-plus"></i>
-                <span class="pl-2">Add To Cart</span>
-            </button>
-            <a
-                routerLink="/cart"
-                class="bg-yellow-400 text-black px-4 md:px-6 py-2 md:py-3 text-base md:text-lg hover:bg-yellow-500 hover:shadow-lg transition ease-in-out duration-300 rounded-lg text-center flex items-center justify-center"
-            >
-                Proceed to Checkout
-            </a>
+
+    <div class="pt-16">
+        <div *ngIf="similarProducts$ | async as products">
+            <app-product-carousal
+                [hasDetailsBtn]="false"
+                [products]="products"
+                [category]="'Similar Products'"
+                (selectedProductEvent)="onSelectedProductEvent($event)"
+            ></app-product-carousal>
         </div>
     </div>
 </div>

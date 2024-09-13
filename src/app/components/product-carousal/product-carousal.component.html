@@ -1,0 +1,21 @@
+<div class="bg-white px-6">
+    <div class="flex justify-between items-baseline">
+        <p class="pt-5 text-2xl font-medium">
+            <span *ngIf="category">{{ category | titlecase }}</span>
+        </p>
+        <p>
+            <i
+                *ngIf="hasDetailsBtn"
+                class="fa-solid fa-circle-chevron-right fa-2xl text-primary hover:cursor-pointer"
+                (click)="onSelectCategory(category)"
+            ></i>
+        </p>
+    </div>
+    <div class="py-8">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide *ngFor="let product of products">
+                <app-product-card [product]="product" (selectedProductEvent)="onSelectedProductEvent($event)"></app-product-card>
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+</div>

@@ -1,33 +1,35 @@
-<header class="bg-primary-dark shadow-md w-full fixed">
+<header class="bg-primary text-white shadow-md w-full fixed top-0 left-0 z-50">
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
         <!-- Logo -->
         <div class="text-2xl font-bold">
-            <a routerLink="/" class="text-primary">FakeKart</a>
+            <a routerLink="/" class="flex items-center gap-3 italic">
+                <img class="w-[50px] h-[50px]" src="assets/images/icons/logo_lite.png" alt="" /><span>Flipkart</span>
+            </a>
         </div>
 
         <!-- Search Bar -->
         <div class="hidden md:flex w-1/3">
             <input
                 type="text"
-                placeholder="Search products..."
+                placeholder="Search for products, brands and more"
                 class="w-full p-2 rounded-md border border-gray-300 focus:border-primary focus:ring-primary focus:ring-2 focus:outline-none"
             />
         </div>
 
         <!-- Navigation and Icons -->
-        <div class="hidden md:flex items-center space-x-6">
+        <div class="hidden md:flex items-center space-x-6 font-semibold">
             <nav>
                 <ul class="flex space-x-6">
-                    <li><a routerLink="/" class="hover:text-primary">Home </a></li>
-                    <li><a routerLink="/order" class="hover:text-primary">Orders </a></li>
-                    <li><a routerLink="/login" class="hover:text-primary">Login</a></li>
+                    <li><a routerLink="/" class="">Home </a></li>
+                    <li><a routerLink="/order" class="">Orders </a></li>
+                    <li><a routerLink="/login" class="">Login</a></li>
                 </ul>
             </nav>
 
             <!-- Cart Icon -->
             <a routerLink="/cart" class="relative">
                 <!-- Cart Icon itself -->
-                <i class="fa-solid fa-cart-shopping text-gray-500 hover:text-primary text-xl"></i>
+                <i class="fa-solid fa-cart-shopping text-white text-xl"></i>
 
                 <span
                     class="absolute -top-2 -right-3 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center"
@@ -41,7 +43,7 @@
         <div class="md:hidden" (click)="toggleNav = !toggleNav">
             <button id="menuToggle" class="focus:outline-none">
                 <svg
-                    class="w-6 h-6 text-gray-500"
+                    class="w-6 h-6 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

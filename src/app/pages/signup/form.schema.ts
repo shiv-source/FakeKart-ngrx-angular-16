@@ -8,7 +8,8 @@ export const signupFormSchema: FormField[] = [
         required: true,
         minLength: 2,
         maxLength: 30,
-        matIcon: 'person'
+        matIcon: 'person',
+        wrapperClass: 'col-span-12'
     },
     {
         key: 'firstName',
@@ -17,7 +18,8 @@ export const signupFormSchema: FormField[] = [
         required: true,
         minLength: 2,
         maxLength: 30,
-        matIcon: 'person'
+        matIcon: 'person',
+        wrapperClass: 'col-span-12'
     },
     {
         key: 'email',

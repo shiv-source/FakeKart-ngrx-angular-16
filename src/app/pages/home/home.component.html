@@ -1,5 +1,22 @@
-<div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6 px-16 pt-24 pb-10 bg-primary-dark">
-    <div *ngFor="let product of products$ | async">
-        <app-product-card [product]="product" (productSelectEvent)="onProductSelectEvent($event)"></app-product-card>
+<div class="pt-24 px-4 w-full bg-primary-dark">
+    <div class="w-full bg-white">
+        <img class="w-full h-auto object-cover" src="assets/images/banners/big-sell.jpg" alt="" />
+    </div>
+    <div class="pt-5" *ngIf="banners?.length">
+        <owl-carousel-o [options]="customOptions">
+            <ng-template carouselSlide *ngFor="let banner of banners">
+                <img [src]="banner" [alt]="banner" class="object-cover aspect-[211/35] w-full h-auto" />
+            </ng-template>
+        </owl-carousel-o>
+    </div>
+    <div class="pt-10 pb-20">
+        <div *ngFor="let categoryProduct of categoryProducts$ | async" class="py-5">
+            <app-product-carousal
+                [category]="categoryProduct.category"
+                [products]="categoryProduct.products"
+                (selectedProductEvent)="onSelectedProductEvent($event)"
+                (selectedCategoryEvent)="onSelectedCategoryEvent($event, categoryProduct)"
+            ></app-product-carousal>
+        </div>
     </div>
 </div>

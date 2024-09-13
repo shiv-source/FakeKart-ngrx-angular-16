@@ -1,11 +1,22 @@
-<div class="pt-24 w-full min-h-screen flex justify-center px-4 sm:px-8 lg:px-16">
-    <div class="w-full max-w-md sm:max-w-lg lg:max-w-2xl">
-        <div class="px-4 sm:px-8 py-5 bg-white rounded-lg">
-            <p class="pb-6 font-bold text-2xl sm:text-3xl text-primary">Login Form</p>
-            <app-dynamic-form [formFields]="_loginFormSchema"></app-dynamic-form>
+<div class="w-full h-screen flex items-center justify-center bg-primary-dark pt-24 pb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 w-full max-w-4xl h-full">
+        <div class="bg-primary flex flex-col justify-between relative px-10 py-16">
             <div>
-                <p>Forget password</p>
-                <p class="pt-1">Don't have an account ? <a routerLink="/signup" class="text-primary">Signup</a></p>
+                <p class="text-3xl text-white font-medium">Looks like you're new here!</p>
+                <p class="text-xl pt-8 text-white">Sign up with your mobile number to get started</p>
+            </div>
+            <img
+                class="absolute bottom-5 left-5 w-3/4 max-w-xs"
+                src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/login_img-dec4bf.png"
+                alt="Login Illustration"
+            />
+        </div>
+        <div class="bg-white px-8 py-16 relative">
+            <div class="w-full max-w-md">
+                <app-dynamic-form [formFields]="_loginFormSchema"></app-dynamic-form>
+            </div>
+            <div class="absolute bottom-10 left-0 text-center w-full">
+                <a class="text-primary text-lg font-medium" routerLink="/signup">New to Flipkart? Create an account </a>
             </div>
         </div>
     </div>

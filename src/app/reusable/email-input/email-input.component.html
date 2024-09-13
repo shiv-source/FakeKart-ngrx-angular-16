@@ -1,7 +1,7 @@
 <mat-form-field [appearance]="appearance" class="w-full">
     <mat-label>{{ label }}</mat-label>
-    <input matInput [placeholder]="placeholder" [formControl]="control" class="w-full"/>
-    <mat-icon *ngIf="_matIcon && iconPosition === 'suffix'" matSuffix>{{_matIcon}}</mat-icon>
-    <mat-icon *ngIf="_matIcon && iconPosition === 'prefix'" matPrefix>{{_matIcon}}</mat-icon>
+    <input matInput [placeholder]="placeholder" [formControl]="control" class="w-full" />
+    <mat-icon *ngIf="_matIcon && iconPosition === 'suffix'" matSuffix>{{ _matIcon }}</mat-icon>
+    <mat-icon *ngIf="_matIcon && iconPosition === 'prefix'" matPrefix>{{ _matIcon }}</mat-icon>
     <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
 </mat-form-field>

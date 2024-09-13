@@ -1,1 +1,18 @@
-<p>products works!</p>
+<div class="pt-24 px-4 pb-16 w-full bg-primary-dark min-h-screen">
+    <ng-container *ngIf="selectedCategory">
+        <ng-container *ngIf="categoryProduct$ | async as categoryProduct">
+            <div class="title py-8 text-center">
+                <p class="text-3xl font-medium">{{ categoryProduct.category | titlecase }}</p>
+                <p class="pt-2 text-gray-500">{{ categoryProduct.products.length }} Items</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-6">
+                <div *ngFor="let product of categoryProduct.products">
+                    <app-product-card
+                        [product]="product"
+                        (selectedProductEvent)="onSelectedProductEvent($event)"
+                    ></app-product-card>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>

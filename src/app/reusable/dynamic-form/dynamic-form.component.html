@@ -1,4 +1,4 @@
-<form #form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="w-full" >
+<form #form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="w-full">
     <div class="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-12 gap-4" #formContainer></div>
     <ng-container *ngIf="actionTemplate; else defaultAction" [ngTemplateOutlet]="actionTemplate"></ng-container>
 </form>

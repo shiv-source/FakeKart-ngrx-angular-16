@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core'
+import { UtilsService } from 'src/app/services/utils.service'
 import { Product } from 'src/app/store/product/product.model'
 
 @Component({
@@ -9,11 +10,25 @@ import { Product } from 'src/app/store/product/product.model'
 export class ProductCardComponent {
     @Input() product: Product | undefined
 
-    @Output() productSelectEvent = new EventEmitter<Product>()
+    @Output() selectedProductEvent = new EventEmitter<Product>()
 
-    constructor() {}
+    constructor(private readonly utilsService: UtilsService) {}
+
+    get priceAfterDiscount() {
+        // const price = this.product?.price ? this.product.price - (this.product?.discount ?? 0) : 0
+        // return price.toFixed(2)
+
+        return this.product ? this.utilsService.getPriceAfterDiscount(this.product) : 0
+    }
+
+    get discountPercent() {
+        // const percent = this.product?.price ? ((this.product?.discount ?? 0) / this.product.price) * 100 : 0
+        // return percent.toFixed(2)
+
+        return this.product ? this.utilsService.getDiscountPercent(this.product) : 0
+    }
 
     onProductSelect(product: Product) {
-        this.productSelectEvent.emit(product)
+        this.selectedProductEvent.emit(product)
     }
 }

@@ -2,18 +2,21 @@ import { Action, ActionReducer, ActionReducerMap, INIT, UPDATE } from '@ngrx/sto
 import { environment } from 'src/environments/environment'
 import { AuthState, authReducer } from './auth/auth.reducer'
 import { CartState, cartReducer } from './cart/cart.reducer'
+import { CategoryState, categoryReducer } from './category/category.reducer'
 import { ProductState, productReducer } from './product/product.reducer'
 
 export interface AppState {
     product: ProductState
     cart: CartState
     auth: AuthState
+    category: CategoryState
 }
 
 export const reducers: ActionReducerMap<AppState> = {
     product: productReducer,
     cart: cartReducer,
-    auth: authReducer
+    auth: authReducer,
+    category: categoryReducer
 }
 
 export const loggerMetaReducer = (reducer: ActionReducer<any>): ActionReducer<any> => {

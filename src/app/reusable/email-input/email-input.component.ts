@@ -6,7 +6,7 @@ import { FormControl, Validators } from '@angular/forms'
     templateUrl: './email-input.component.html',
     styleUrls: ['./email-input.component.scss']
 })
-export class EmailInputComponent implements AfterViewInit{
+export class EmailInputComponent implements AfterViewInit {
     @Input() control!: FormControl
     @Input() label!: string
     @Input() iconPosition: 'prefix' | 'suffix' = 'suffix'
@@ -16,9 +16,7 @@ export class EmailInputComponent implements AfterViewInit{
 
     _matIcon: string = 'email'
 
-    constructor() {
-     
-    }
+    constructor() {}
 
     ngAfterViewInit(): void {
         this.control.addValidators(Validators.email)
